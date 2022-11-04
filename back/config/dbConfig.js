@@ -5,7 +5,7 @@ const Sequelize = require('sequelize'); // Vai receber o sequelize
 const database = new Sequelize('sesi','root','',{
     dialect: 'mysql',
     host:'localhost',
-    port: 3306,
+    port: 3307,
 });
 
 // Exportar módulo
