@@ -2,26 +2,34 @@ import React, { useState, useEffect } from "react";
 import "./table.css";
 import { Button, Table, Form } from "react-bootstrap";
 import SolicitarExame from "../SolicitarExame";
-import Axios from "axios";
-
+import Axios from "axios"
 
 function AvalicacoesPendentes() {
 
-  const [solicitar, setSoliticar] = useState(false)
+  const [solicitar, setSolicitar] = useState("")
+
+  let array_nomes = []
+  let array_cpf = []
+
+  const [nome, setNome] = useState([])
+  const [cpf, setCpf] = useState([])
 
   useEffect(() => {
     Axios.get('http://localhost:3000/medico/solicited')
     .then((res) =>{
-      console.log(res.data)
+     /*  console.log(res.data) */
+        for (let x = 0; x < res.data.length; x++) {
+          array_nomes.push(res['data'][x]['nome'])
+          array_cpf.push(res['data'][x]['cpf'])
+        }
+        setNome(array_nomes)
+        setCpf(array_cpf)
+
+        let found = array_nomes.find(element => element === 'Thiago');
+        console.log(found)
     })
 },[])
 
-  useEffect(() => {
-    Axios.get('http://localhost:3000/medico/pending')
-    .then((res) =>{
-      console.log(res.data)
-    })
-  },[])
 
   return (
     <>
@@ -41,19 +49,19 @@ function AvalicacoesPendentes() {
           </thead>
           <tbody>
             <tr>
-              <td>Atleta1</td>
+              <td>{found}</td>
               <td>111.111.111-11</td>
               <td>
-                <Button variant="success" size="sm" onClick={setSoliticar}>
+                <Button variant="success" size="sm" onClick={setSolicitar}>
                   Solicitar
                 </Button>
               </td>
             </tr>
             <tr>
-              <td>Atleta2</td>
+              <td>{cpf}</td>
               <td>111.111.111-11</td>
               <td>
-                <Button variant="success" size="sm" onClick={setSoliticar}>
+                <Button variant="success" size="sm" onClick={setSolicitar}>
                   Solicitar
                 </Button>
               </td>
