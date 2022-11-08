@@ -2,37 +2,47 @@ import React, { useState, useEffect } from "react";
 import "./table.css";
 import { Button, Table, Form } from "react-bootstrap";
 import SolicitarExame from "../SolicitarExame";
-import Axios from "axios";
+import Axios from "axios"
 
-let array_nomes = [];
-let array_cpf = [];
+let array_nomes = []
+let array_cpf = []
 
 function AvalicacoesPendentes() {
-  const [solicitar, setSolicitar] = useState("")
+
+  const [solicitar, setSoliticar] = useState(false)
   const [nome, setNome] = useState("")
+  const [cpf, setCpf] = useState("")
+
   useEffect(() => {
-    Axios.get('http://localhost:3000/medico/solicited')
+    Axios.get('http://localhost:3000/medico/pending')
     .then((res) =>{
         array_nomes = []
+        array_cpf = []
         for (let x = 0; x < res.data.length; x++) {
           array_nomes.push(res['data'][x]['nome'])
           array_cpf.push(res['data'][x]['cpf'])
         }
-        console.log(array_nomes)
     })
 },[])
-const [nomex , setNomex] = useState("")
 
-const chamar_nome = () => {
-  let found = array_nomes.find(element => element === nomex);
-  setNome(found) 
+const [buscar_nome, setBuscarnome] = useState("")
+
+function chamar_nome(){
+  let found_nome = array_nomes.find(element => element === buscar_nome);
+  setNome(found_nome)
+  let found_cpf = array_nomes.indexOf(buscar_nome);
+  setCpf(array_cpf[found_cpf])
 }
+
   return (
     <>
       {solicitar ? (<SolicitarExame />) : (<>
         <Form.Group className="w-25 form mb-3" controlId="formBasicEmail">
-          <Form.Label>Buscar:</Form.Label>
-          <Form.Control className="buscar" placeholder="" onChange={(e) => setNomex(e.target.value)}/>
+          <Form.Label>Nome:</Form.Label>
+          <div className="d-flex">
+          <Form.Control className="buscar mx-1" type="text" placeholder="" onChange={(e) => setBuscarnome(e.target.value)} />
+          <Button variant="success" size="sm" onClick={chamar_nome}>Buscar</Button>
+          </div>
           <Form.Text className="text-muted"></Form.Text>
         </Form.Group>
         <Table striped bordered hover>
@@ -46,18 +56,9 @@ const chamar_nome = () => {
           <tbody>
             <tr>
               <td>{nome}</td>
-              <td>111.111.111-11</td>
+              <td>{cpf}</td>
               <td>
-                <Button variant="success" size="sm" onClick={chamar_nome}>
-                  Solicitar
-                </Button>
-              </td>
-            </tr>
-            <tr>
-              <td></td>
-              <td>111.111.111-11</td>
-              <td>
-                <Button variant="success" size="sm" onClick={setSolicitar}>
+                <Button variant="success" size="sm" onClick={setSoliticar}>
                   Solicitar
                 </Button>
               </td>
@@ -69,4 +70,5 @@ const chamar_nome = () => {
     </>
   );
 }
+
 export default AvalicacoesPendentes;
