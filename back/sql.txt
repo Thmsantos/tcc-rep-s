@@ -1,0 +1,41 @@
+create database sesi;
+use sesi;
+desc atletas;
+desc endereco_atletas;
+desc endereco_medico_convs;
+desc endereco_medicos;
+desc exames;
+desc gestor_admins;
+desc gestores;
+desc medico_convs;
+desc medicos;
+desc recuperar_senhas;
+desc tel_atletas;
+desc tel_medico_convs;
+
+insert into gestor_admins values (default,"rayane","54639920881","ray@gmail.com","ray1234",'F',"gestor admin", now(), now());
+
+insert into gestores values (default,"vinicius","53899079817","zile1234","vinicius@gmail.com",'M',"gestor","1", now(), now());
+
+INSERT INTO ATLETAS VALUES (DEFAULT, 'ISABEL FERREIRA', '25698745632',"ISA@GMAIL.COM", 'ISABEL123', '2000/05/20', 'F','VOLÊI','LÍBERO','ATLETA', 'VOLÊI PRAIA',"SOLICITADO",'PENDENTE', '1', now(), now());
+
+INSERT INTO ATLETAS VALUES (DEFAULT, 'Thiago', '83690876511',"th@GMAIL.COM", 'ISABEL123', '2000/05/20', 'F','VOLÊI','LÍBERO','ATLETA', 'VOLÊI PRAIA',"SOLICITADO",'PENDENTE', '1', now(), now());
+
+INSERT INTO ATLETAS VALUES (DEFAULT, 'Thiago', '83690876511',"th@GMAIL.COM", 'ISABEL123', '2000/05/20', 'F','VOLÊI','LÍBERO','ATLETA', 'VOLÊI PRAIA',"SOLICITADO",'REPROVADO', '1', now(), now());
+
+INSERT INTO ATLETAS VALUES (DEFAULT, 'Ret', '83690876511',"th@GMAIL.COM", 'ISABEL123', '2000/05/20', 'F','VOLÊI','LÍBERO','ATLETA', 'VOLÊI PRAIA',"NÃO SOLICITADO",'REPROVADO', '1', now(), now());
+
+INSERT INTO ATLETAS VALUES (DEFAULT, 'orochi', '87420876511',"th@GMAIL.COM", 'ISABEL123', '2000/05/20', 'F','VOLÊI','LÍBERO','ATLETA', 'VOLÊI PRAIA',"NÃO SOLICITADO",'REPROVADO', '1', now(), now());
+
+
+INSERT INTO MEDICOS VALUES (DEFAULT, 'FABIO', '78955623145',"123456987",'M','Thiagomessias411@gmail.com','FABIO123','CARDIOLOGISTA','Médico',1, now(), now());
+truncate table atletas;
+select * from atletas; 
+select * from gestores;
+select * from medicos;
+
+
+
+
+
+
